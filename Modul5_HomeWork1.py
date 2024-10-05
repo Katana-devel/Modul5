@@ -1,4 +1,5 @@
 import collections
+
 def caching_fibonacci():
     cache = collections.defaultdict()
 
@@ -9,14 +10,13 @@ def caching_fibonacci():
             return 1
         elif n in cache:
             return cache[n]
-
-        cache[n] = fibonacci(n - 1) + fibonacci(n - 2)
-        return cache[n]
+        else:
+            result = cache[n] = fibonacci(n - 1) + fibonacci(n - 2)
+            cache[n] = result
+        return result
     return fibonacci
 
-# Отримуємо функцію fibonacci
 fib = caching_fibonacci()
 
-# Використовуємо функцію fibonacci для обчислення чисел Фібоначчі
-print(fib(10))  # Виведе 55
-print(fib(15))  # Виведе 610
+print(fib(10))
+print(fib(15))
